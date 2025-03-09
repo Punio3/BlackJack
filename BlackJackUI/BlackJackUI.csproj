@@ -1,0 +1,127 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\background_bj.png" />
+    <None Remove="Assets\Clubs\10club.png" />
+    <None Remove="Assets\Clubs\2club.png" />
+    <None Remove="Assets\Clubs\3club.png" />
+    <None Remove="Assets\Clubs\4club.png" />
+    <None Remove="Assets\Clubs\5club.png" />
+    <None Remove="Assets\Clubs\6club.png" />
+    <None Remove="Assets\Clubs\7club.png" />
+    <None Remove="Assets\Clubs\8club.png" />
+    <None Remove="Assets\Clubs\9club.png" />
+    <None Remove="Assets\Clubs\Aclub.png" />
+    <None Remove="Assets\Clubs\Jclub.png" />
+    <None Remove="Assets\Clubs\Kclub.png" />
+    <None Remove="Assets\Clubs\Q.png" />
+    <None Remove="Assets\Diamonds\10diamond.png" />
+    <None Remove="Assets\Diamonds\2diamond.png" />
+    <None Remove="Assets\Diamonds\3diamond.png" />
+    <None Remove="Assets\Diamonds\4diamond.png" />
+    <None Remove="Assets\Diamonds\5diamond.png" />
+    <None Remove="Assets\Diamonds\6diamond.png" />
+    <None Remove="Assets\Diamonds\7diamond.png" />
+    <None Remove="Assets\Diamonds\8diamond.png" />
+    <None Remove="Assets\Diamonds\9diamond.png" />
+    <None Remove="Assets\Diamonds\Adiamond.png" />
+    <None Remove="Assets\Diamonds\Jdiamond.png" />
+    <None Remove="Assets\Diamonds\Kdiamond.png" />
+    <None Remove="Assets\Diamonds\Qdiamond.png" />
+    <None Remove="Assets\Hearts\10heart.png" />
+    <None Remove="Assets\Hearts\2heart.png" />
+    <None Remove="Assets\Hearts\3heart.png" />
+    <None Remove="Assets\Hearts\4heart.png" />
+    <None Remove="Assets\Hearts\5heart.png" />
+    <None Remove="Assets\Hearts\6heart.png" />
+    <None Remove="Assets\Hearts\7heart.png" />
+    <None Remove="Assets\Hearts\8heart.png" />
+    <None Remove="Assets\Hearts\9heart.png" />
+    <None Remove="Assets\Hearts\Aheart.png" />
+    <None Remove="Assets\Hearts\Jheart.png" />
+    <None Remove="Assets\Hearts\Kheart.png" />
+    <None Remove="Assets\Hearts\Qheart.png" />
+    <None Remove="Assets\Spades\10spade.png" />
+    <None Remove="Assets\Spades\2spade.png" />
+    <None Remove="Assets\Spades\3spade.png" />
+    <None Remove="Assets\Spades\4spade.png" />
+    <None Remove="Assets\Spades\5spade.png" />
+    <None Remove="Assets\Spades\6spade.png" />
+    <None Remove="Assets\Spades\7spade.png" />
+    <None Remove="Assets\Spades\8spade.png" />
+    <None Remove="Assets\Spades\9spade.png" />
+    <None Remove="Assets\Spades\Aspade.png" />
+    <None Remove="Assets\Spades\Jspade.png" />
+    <None Remove="Assets\Spades\Kspade.png" />
+    <None Remove="Assets\Spades\Qspade.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJackLogic\BlackJackLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\background_bj.png" />
+    <Resource Include="Assets\Clubs\10club.png" />
+    <Resource Include="Assets\Clubs\2club.png" />
+    <Resource Include="Assets\Clubs\3club.png" />
+    <Resource Include="Assets\Clubs\4club.png" />
+    <Resource Include="Assets\Clubs\5club.png" />
+    <Resource Include="Assets\Clubs\6club.png" />
+    <Resource Include="Assets\Clubs\7club.png" />
+    <Resource Include="Assets\Clubs\8club.png" />
+    <Resource Include="Assets\Clubs\9club.png" />
+    <Resource Include="Assets\Clubs\Aclub.png" />
+    <Resource Include="Assets\Clubs\Jclub.png" />
+    <Resource Include="Assets\Clubs\Kclub.png" />
+    <Resource Include="Assets\Clubs\Q.png" />
+    <Resource Include="Assets\Diamonds\10diamond.png" />
+    <Resource Include="Assets\Diamonds\2diamond.png" />
+    <Resource Include="Assets\Diamonds\3diamond.png" />
+    <Resource Include="Assets\Diamonds\4diamond.png" />
+    <Resource Include="Assets\Diamonds\5diamond.png" />
+    <Resource Include="Assets\Diamonds\6diamond.png" />
+    <Resource Include="Assets\Diamonds\7diamond.png" />
+    <Resource Include="Assets\Diamonds\8diamond.png" />
+    <Resource Include="Assets\Diamonds\9diamond.png" />
+    <Resource Include="Assets\Diamonds\Adiamond.png" />
+    <Resource Include="Assets\Diamonds\Jdiamond.png" />
+    <Resource Include="Assets\Diamonds\Kdiamond.png" />
+    <Resource Include="Assets\Diamonds\Qdiamond.png" />
+    <Resource Include="Assets\Hearts\10heart.png" />
+    <Resource Include="Assets\Hearts\2heart.png" />
+    <Resource Include="Assets\Hearts\3heart.png" />
+    <Resource Include="Assets\Hearts\4heart.png" />
+    <Resource Include="Assets\Hearts\5heart.png" />
+    <Resource Include="Assets\Hearts\6heart.png" />
+    <Resource Include="Assets\Hearts\7heart.png" />
+    <Resource Include="Assets\Hearts\8heart.png" />
+    <Resource Include="Assets\Hearts\9heart.png" />
+    <Resource Include="Assets\Hearts\Aheart.png" />
+    <Resource Include="Assets\Hearts\Jheart.png" />
+    <Resource Include="Assets\Hearts\Kheart.png" />
+    <Resource Include="Assets\Hearts\Qheart.png" />
+    <Resource Include="Assets\Spades\10spade.png" />
+    <Resource Include="Assets\Spades\2spade.png" />
+    <Resource Include="Assets\Spades\3spade.png" />
+    <Resource Include="Assets\Spades\4spade.png" />
+    <Resource Include="Assets\Spades\5spade.png" />
+    <Resource Include="Assets\Spades\6spade.png" />
+    <Resource Include="Assets\Spades\7spade.png" />
+    <Resource Include="Assets\Spades\8spade.png" />
+    <Resource Include="Assets\Spades\9spade.png" />
+    <Resource Include="Assets\Spades\Aspade.png" />
+    <Resource Include="Assets\Spades\Jspade.png" />
+    <Resource Include="Assets\Spades\Kspade.png" />
+    <Resource Include="Assets\Spades\Qspade.png" />
+  </ItemGroup>
+
+</Project>
