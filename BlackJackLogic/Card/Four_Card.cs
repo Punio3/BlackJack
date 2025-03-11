@@ -10,7 +10,7 @@ namespace BlackJackLogic
     {
         public override CardType Type => CardType.Four;
         public override CardSymbol Symbol { get; }
-
+        public override int Value => 4;
         public Four_Card(CardSymbol symbol)
         {
             Symbol = symbol;

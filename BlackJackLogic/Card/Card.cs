@@ -10,5 +10,7 @@ namespace BlackJackLogic
     {
         public abstract CardSymbol Symbol { get; }
         public abstract CardType Type { get; }
+
+        public abstract int Value {  get; }
     }
 }

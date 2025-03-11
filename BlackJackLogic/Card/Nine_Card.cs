@@ -10,7 +10,7 @@ namespace BlackJackLogic
     {
         public override CardType Type => CardType.Nine;
         public override CardSymbol Symbol { get; }
-
+        public override int Value => 9;
         public Nine_Card(CardSymbol symbol)
         {
             Symbol = symbol;
