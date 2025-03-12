@@ -212,9 +212,33 @@ namespace BlackJackLogic
 
         }
 
-        public void ClearAll()
+        private void CheckWonCourses()
         {
-            
+            for(int i=0;i<Courses.Count;i++)
+            {
+                if (Courses[i].IsWin)
+                {
+                    PlayerMoney += Courses[i].PlayerBet * Courses[i]._CourseValue;
+                    Courses[i].IsWin = false;
+                    Courses[i].PlayerBet = 50.0f;
+                }
+            }
         }
+        public void CreateNewGame()
+        {
+            while (PlayerBoard.AmountOfCards != 0)
+            {
+                AllCards.Add(PlayerBoard.DeleteCard());
+            }
+            while (KrupierBoard.AmountOfCards != 0)
+            {
+                AllCards.Add(KrupierBoard.DeleteCard());
+            }
+
+            _PlayerType= PlayerType.Gracz;
+            CheckWonCourses();
+            IsGameEnded = false;
+        }
+
     }
 }

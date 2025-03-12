@@ -38,5 +38,18 @@ namespace BlackJackLogic
                 AmountOfPoints += card.Value;
             }
         }
+
+        public Card DeleteCard()
+        {
+            if(AmountOfCards > 0)
+            {
+                Card card = Cards[AmountOfCards-1];
+                Cards[AmountOfCards - 1] = null;
+                AmountOfPoints-=card.Value;
+                AmountOfCards--;
+                return card;
+            }
+            return null;
+        }
     }
 }

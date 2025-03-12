@@ -11,6 +11,7 @@ namespace BlackJackUI
     {
         private int playerScore;
         private int dealerScore;
+        private int gametimer;
 
         private float playerMoney;
 
@@ -97,6 +98,16 @@ namespace BlackJackUI
             {
                 fiveCardCourse = value;
                 OnPropertyChanged(nameof(FiveCardCourse));
+            }
+        }
+
+        public int GameTimer
+        {
+            get { return gametimer; }
+            set
+            {
+                gametimer = value;
+                OnPropertyChanged(nameof(GameTimer));
             }
         }
 

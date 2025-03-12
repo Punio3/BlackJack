@@ -69,21 +69,38 @@ namespace BlackJackUI
                 KrupierCardImages[i / 5, i % 5].Source = Images.GetImage(card2);
             }
         }
+
+        private async Task DelayCountdown(int seconds)
+        {
+            for (int j = seconds; j >= 0; j--)
+            {
+                viewModel.GameTimer = j;
+                await Task.Delay(1000);
+            }
+        }
         private async void GameLoop()
         {
+            UpdateViewModel();
+            UpdateCourses();
+            await DelayCountdown(5);
+
             for (int i = 0; i < 3; i++)
             {
                 gameState.AddCard();
                 UpdateViewModel();
                 DrawBoard();
                 gameState.ChangePlayer();
-                await Task.Delay(2000);
+                if (i != 2)
+                {
+                    await DelayCountdown(2);
+                }
             }
+
             UpdateCourses();
             gameState.ChangePlayer();
             gameState.ChangePlayer2();
             gameState.CheckWin();
-            await Task.Delay(5000);
+            await DelayCountdown(5);
 
             while (!gameState.IsGameEnded)
             {
@@ -92,16 +109,24 @@ namespace BlackJackUI
                 DrawBoard();
                 gameState.CheckWin();
                 gameState.ChangePlayer2();
-                await Task.Delay(2500);
+
+                if (!gameState.IsGameEnded)
+                {
+                    await DelayCountdown(3);
+                }
             }
 
-            for(int i=0;i<gameState.Courses.Count;i++)
+            for (int i = 0; i < gameState.Courses.Count; i++)
             {
                 if (gameState.Courses[i].IsWin)
                 {
                     MessageBox.Show($"Wygralo: {i}");
                 }
             }
+
+            gameState.CreateNewGame();
+            DrawBoard();
+            GameLoop();
         }
 
 

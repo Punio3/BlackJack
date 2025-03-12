@@ -40,7 +40,11 @@
         <TextBlock Text="{Binding PlayerMoney, StringFormat='Money: {0}'}" FontSize="15" FontWeight="Bold"
              Foreground="White" Padding="5"
              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="830,16,0,0"/>
-        
+
+        <TextBlock Text="{Binding GameTimer, StringFormat=' {0}'}" FontSize="18" FontWeight="Bold"
+                   Foreground="White" Padding="5"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="481,272,0,0"/>
+
         <!-- Pola tekstowe na kursy do obstawienia -->
         <Button FontSize="15" FontWeight="Bold" Padding="5"
         Foreground="White" Background="#B0000000"
