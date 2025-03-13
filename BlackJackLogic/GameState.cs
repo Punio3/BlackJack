@@ -15,7 +15,7 @@ namespace BlackJackLogic
         private PlayerType _PlayerType { get; set; }
         public float PlayerMoney { get; set; }
         public bool IsGameEnded { get; set; }
-
+        public bool CanBet {  get; set; }
         public List<Course> Courses { get; set; }
 
         private BetCounter _BetCounter { get; set; }
@@ -32,6 +32,7 @@ namespace BlackJackLogic
             _PlayerType = PlayerType.Gracz;
             PlayerMoney = 100;
             IsGameEnded = false;
+            CanBet = false;
 
             AddAllCards();
             AddCourses();
@@ -193,6 +194,11 @@ namespace BlackJackLogic
             }
         }
 
+        public bool CheckCanBet(float money)
+        {
+            if (money < PlayerMoney) return true;
+            return false;
+        }
         public void AddCard()
         {
             int RandomNumber = random.Next(AllCards.Count);
@@ -220,8 +226,8 @@ namespace BlackJackLogic
                 {
                     PlayerMoney += Courses[i].PlayerBet * Courses[i]._CourseValue;
                     Courses[i].IsWin = false;
-                    Courses[i].PlayerBet = 50.0f;
                 }
+                Courses[i].PlayerBet = 0;
             }
         }
         public void CreateNewGame()

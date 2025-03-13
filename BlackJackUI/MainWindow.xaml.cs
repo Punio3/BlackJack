@@ -10,6 +10,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlackJackLogic;
 
+/*CO ZROBIC TRZEBA:
+ * a) przetestowac sprawdzanie wygranej (cos z blackjackiem mozliwe)
+ * b) liczenie kursow 
+ * c) zaokraglanie pieniedzy, betow do 2 miejsc po przecinku
+ * d) ladnijesze gui przyciskow
+ * e) background na czerwono przyciskow jak nie mozna stawiac zakladow
+ * f) obsluga zasady z asem w grze
+ */
+
 namespace BlackJackUI
 {
     /// <summary>
@@ -82,8 +91,10 @@ namespace BlackJackUI
         {
             UpdateViewModel();
             UpdateCourses();
-            await DelayCountdown(5);
+            gameState.CanBet = true;
+            await DelayCountdown(10);
 
+            gameState.CanBet = false;
             for (int i = 0; i < 3; i++)
             {
                 gameState.AddCard();
@@ -96,12 +107,17 @@ namespace BlackJackUI
                 }
             }
 
-            UpdateCourses();
-            gameState.ChangePlayer();
-            gameState.ChangePlayer2();
-            gameState.CheckWin();
-            await DelayCountdown(5);
 
+            gameState.CheckWin();
+            if (!gameState.IsGameEnded)
+            {
+                UpdateCourses();
+                gameState.ChangePlayer();
+                gameState.ChangePlayer2();
+                gameState.CanBet = true;
+                await DelayCountdown(5);
+            }
+            gameState.CanBet = false;
             while (!gameState.IsGameEnded)
             {
                 gameState.AddCard();
@@ -116,32 +132,50 @@ namespace BlackJackUI
                 }
             }
 
-            for (int i = 0; i < gameState.Courses.Count; i++)
-            {
-                if (gameState.Courses[i].IsWin)
-                {
-                    MessageBox.Show($"Wygralo: {i}");
-                }
-            }
+
+            MakeGoldWinCourses();
+            await DelayCountdown(5);
+            ResetAllButtons();
 
             gameState.CreateNewGame();
             DrawBoard();
             GameLoop();
         }
 
+        private void MakeGoldWinCourses()
+        {
+            if (gameState.Courses[0].IsWin) OneCardsButton.Background= new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[1].IsWin) TwoCardsButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[2].IsWin) ThreeCardsButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[3].IsWin) FourCardsButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[4].IsWin) FiveCardsButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[5].IsWin) BlackJackWinButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[6].IsWin) PlayerWinButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[7].IsWin) DealerWinButton.Background = new SolidColorBrush(Colors.Gold);
+            if (gameState.Courses[8].IsWin) DrawWinButton.Background = new SolidColorBrush(Colors.Gold);
+
+        }
+
+        private void ResetAllButtons()
+        {
+            OneCardsButton.Background = new SolidColorBrush(Colors.Black);
+            TwoCardsButton.Background = new SolidColorBrush(Colors.Black);
+            ThreeCardsButton.Background = new SolidColorBrush(Colors.Black);
+            FourCardsButton.Background = new SolidColorBrush(Colors.Black);
+            FiveCardsButton.Background = new SolidColorBrush(Colors.Black);
+            BlackJackWinButton.Background = new SolidColorBrush(Colors.Black);
+            DealerWinButton.Background = new SolidColorBrush(Colors.Black);
+            PlayerWinButton.Background = new SolidColorBrush(Colors.Black);
+            DrawWinButton.Background = new SolidColorBrush(Colors.Black);
+        }
+
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            StartButton.Background = new SolidColorBrush(Colors.Red); // Zmiana koloru przycisku
+            StartButton.Background = new SolidColorBrush(Colors.Red); 
             GameLoop();
         }
 
-        
-        private void BetOnOneCard(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Gra xd!");
-
-        }
 
         private void UpdateViewModel()
         {
@@ -156,8 +190,121 @@ namespace BlackJackUI
             viewModel.ThreeCardCourse = 1.28f;
             viewModel.FourCardCourse = 1.25f;
             viewModel.FiveCardCourse = 1.55f;
+            viewModel.PlayerWinCourse = 1.28f;
+            viewModel.DealerWinCourse = 1.25f;
+            viewModel.BlackJackWinCourse = 1.55f;
+            viewModel.DrawWinCourse = 1.66f;
 
             viewModel.PlayerMoney = gameState.PlayerMoney;
+        }
+
+        private void BetOnOneCard(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[0].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+        }
+
+        private void BetOnTwoCard(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[1].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+        }
+        private void BetOnThreeCard(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[2].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+        }
+
+        private void BetOnFourCard(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[3].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+
+        }
+        private void BetOnFiveCard(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[4].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+
+        }
+        private void BetOnPlayerWin(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[6].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+
+        }
+        private void BetOnDealerWin(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[7].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+
+        }
+
+        private void BetOnBlackJackWin(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[5].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+
+        }
+        private void BetOnDrawWin(object sender, RoutedEventArgs e)
+        {
+            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+
+            if (gameState.CanBet && gameState.CheckCanBet(betAmount))
+            {
+                gameState.PlayerMoney -= betAmount;
+                gameState.Courses[8].PlayerBet += betAmount;
+                viewModel.PlayerMoney = gameState.PlayerMoney;
+            }
+
         }
     }
 }

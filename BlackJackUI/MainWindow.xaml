@@ -46,7 +46,7 @@
                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="481,272,0,0"/>
 
         <!-- Pola tekstowe na kursy do obstawienia -->
-        <Button FontSize="15" FontWeight="Bold" Padding="5"
+        <Button Name="OneCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
         Foreground="White" Background="#B0000000"
         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" 
          Click="BetOnOneCard">
@@ -77,9 +77,10 @@
             </StackPanel>
         </Button>
 
-        <Button FontSize="15" FontWeight="Bold" Padding="5"
+        <Button Name="TwoCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
         Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0">
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0"
+         Click="BetOnTwoCard">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Foreground" Value="White"/>
@@ -107,9 +108,10 @@
             </StackPanel>
         </Button>
 
-        <Button FontSize="15" FontWeight="Bold" Padding="5"
+        <Button Name="ThreeCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
         Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,150,0,0">
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,150,0,0"
+        Click="BetOnThreeCard">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Foreground" Value="White"/>
@@ -137,9 +139,10 @@
             </StackPanel>
         </Button>
 
-        <Button FontSize="15" FontWeight="Bold" Padding="5"
+        <Button Name="FourCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
         Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,200,0,0">
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,200,0,0"
+        Click="BetOnFourCard">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Foreground" Value="White"/>
@@ -167,9 +170,10 @@
             </StackPanel>
         </Button>
 
-        <Button FontSize="15" FontWeight="Bold" Padding="5"
+        <Button Name="FiveCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
         Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,250,0,0">
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,250,0,0"
+        Click="BetOnFiveCard">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Foreground" Value="White"/>
@@ -196,6 +200,135 @@
                 <TextBlock Text="{Binding FiveCardCourse}" />
             </StackPanel>
         </Button>
+
+        <Button Name="PlayerWinButton" FontSize="15" FontWeight="Bold" Padding="5"
+        Foreground="White" Background="#B0000000"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,300,0,0"
+        Click="BetOnPlayerWin">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#B0000000"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Wygra gracz: " />
+                <TextBlock Text="{Binding PlayerWinCourse}" />
+            </StackPanel>
+        </Button>
+
+        <Button Name="DealerWinButton" FontSize="15" FontWeight="Bold" Padding="5"
+        Foreground="White" Background="#B0000000"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,350,0,0"
+        Click="BetOnDealerWin">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#B0000000"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Krupier wygra: " />
+                <TextBlock Text="{Binding DealerWinCourse}" />
+            </StackPanel>
+        </Button>
+
+        <Button Name="BlackJackWinButton" FontSize="15" FontWeight="Bold" Padding="5"
+        Foreground="White" Background="#B0000000"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,400,0,0"
+        Click="BetOnBlackJackWin">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#B0000000"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="BlackJack: " />
+                <TextBlock Text="{Binding BlackJackWinCourse}" />
+            </StackPanel>
+        </Button>
+
+
+        <Button Name="DrawWinButton" FontSize="15" FontWeight="Bold" Padding="5"
+        Foreground="White" Background="#B0000000"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,450,0,0"
+        Click="BetOnDrawWin">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#B0000000"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="wygrana przez remis: " />
+                <TextBlock Text="{Binding DrawWinCourse}" />
+            </StackPanel>
+        </Button>
+
+        <TextBox Name="BetAmountTextBox" Width="120" Height="30" FontSize="16"
+                 HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                 Margin="797,0,0,64" TextAlignment="Center"/>
 
         <!-- Przycisk Start -->
         <Button Name="StartButton" Content="Start" Width="120" Height="50" 

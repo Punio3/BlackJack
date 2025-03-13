@@ -20,6 +20,10 @@ namespace BlackJackUI
         private float thirdCardCourse;
         private float fourCardCourse;
         private float fiveCardCourse;
+        private float playerwinCourse;
+        private float dealerwinCourse;
+        private float drawwinCourse;
+        private float blackjackwinCourse;
 
         public int PlayerScore
         {
@@ -98,6 +102,46 @@ namespace BlackJackUI
             {
                 fiveCardCourse = value;
                 OnPropertyChanged(nameof(FiveCardCourse));
+            }
+        }
+
+        public float PlayerWinCourse
+        {
+            get { return playerwinCourse; }
+            set
+            {
+                playerwinCourse = value;
+                OnPropertyChanged(nameof(PlayerWinCourse));
+            }
+        }
+
+        public float DealerWinCourse
+        {
+            get { return dealerwinCourse ; }
+            set
+            {
+                dealerwinCourse = value;
+                OnPropertyChanged(nameof(DealerWinCourse));
+            }
+        }
+
+        public float DrawWinCourse
+        {
+            get { return drawwinCourse; }
+            set
+            {
+                drawwinCourse = value;
+                OnPropertyChanged(nameof(DrawWinCourse));
+            }
+        }
+
+        public float BlackJackWinCourse
+        {
+            get { return blackjackwinCourse; }
+            set
+            {
+                blackjackwinCourse = value;
+                OnPropertyChanged(nameof(BlackJackWinCourse));
             }
         }
 

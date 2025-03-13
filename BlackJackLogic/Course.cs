@@ -17,7 +17,7 @@ namespace BlackJackLogic
             WinType=winType;
             IsWin = false;
             _CourseValue = 1.33f;
-            PlayerBet = 50.0f;
+            PlayerBet = 0f;
         }
     }
 }
