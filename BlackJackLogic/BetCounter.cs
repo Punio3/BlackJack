@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,117 +11,132 @@ namespace BlackJackLogic
     public class BetCounter
     {
 
-        private int AmountOfTwo;
-        private int AmountOfThree;
-        private int AmountOfFour;
-        private int AmountOfFive;
-        private int AmountOfSix;
-        private int AmountOfSeven;
-        private int AmountOfEight;
-        private int AmountOfNine;
-        private int AmountOfTen;
-        private int AmountOfQueen;
-        private int AmountOfKing;
-        private int AmountOfJopek;
-        private int AmountOfAss;
-
-        public BetCounter()
+        public float[] CoursesValues;
+        public long AllVariants;
+        public int[] AmountOfCards;
+        public BetCounter(bool SetCoursesValues)
         {
-            AmountOfTwo = 4;
-            AmountOfThree = 4;
-            AmountOfFour = 4;
-            AmountOfFive = 4;
-            AmountOfSix = 4;
-            AmountOfSeven = 4;
-            AmountOfEight = 4;
-            AmountOfNine = 4;
-            AmountOfTen = 4;
-            AmountOfQueen = 4;
-            AmountOfKing = 4;
-            AmountOfJopek = 4;
-            AmountOfAss = 4;
-        }
+            if (SetCoursesValues)
+            {
+                CoursesValues = new float[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    CoursesValues[i] = 0;
+                }
+                AllVariants = 0;
+            }
 
+            AmountOfCards = new int[13];
+            for(int i = 0; i < 13; i++)
+            {
+                AmountOfCards[i] = 2;
+            }
+        }
 
         public void DeleteCard(Card card)
         {
             switch (card.Type)
             {
                 case CardType.Ass:
-                    AmountOfAss--;
+                    AmountOfCards[12]--;
                     break;
                 case CardType.Queen:
-                    AmountOfQueen--;
+                    AmountOfCards[9]--;
                     break;
                 case CardType.Jopek:
-                    AmountOfJopek--;
+                    AmountOfCards[10]--;
                     break;
                 case CardType.King:
-                    AmountOfKing--;
+                    AmountOfCards[11]--;
                     break;
                 case CardType.Two:
-                    AmountOfTwo--;
+                    AmountOfCards[0]--;
                     break;
                 case CardType.Three:
-                    AmountOfThree--;
+                    AmountOfCards[1]--;
                     break;
                 case CardType.Four:
-                    AmountOfFour--;
+                    AmountOfCards[2]--;
                     break;
                 case CardType.Five:
-                    AmountOfFive--;
+                    AmountOfCards[3]--;
                     break;
                 case CardType.Six:
-                    AmountOfSix--;
+                    AmountOfCards[4]--;
                     break;
                 case CardType.Seven:
-                    AmountOfSeven--;
+                    AmountOfCards[5]--;
                     break;
                 case CardType.Eight:
-                    AmountOfEight--;
+                    AmountOfCards[6]--;
                     break;
                 case CardType.Nine:
-                    AmountOfNine--;
+                    AmountOfCards[7]--;
                     break;
                 case CardType.Ten:
-                    AmountOfTen--;
+                    AmountOfCards[8]--;
                     break;
             }
         }
-/*
-        private float TwoCardsCourse(int PlayerPoints, int DealerPoints)
+        public void CalculateCoursesValues(GameState _GameState)
         {
 
+            if (!_GameState.IsGameEnded)
+            {
+                for (int i = 0; i < 13; i++)
+                {
+                    if (_GameState._BetCounter.AmountOfCards[i] > 0)
+                    {
+                        GameState NewGameState = _GameState.CopyGameState();
+                        NewGameState.AddSpecificCard(i); 
+                        NewGameState._BetCounter.AmountOfCards[i]--;
+
+                        if (NewGameState.PlayerBoard.AmountOfCards + NewGameState.KrupierBoard.AmountOfCards <= 3)
+                        {
+                            NewGameState.ChangePlayer();
+                        }
+                        else
+                        {
+                            NewGameState.ChangePlayer2();
+                        }
+
+                        if (NewGameState.PlayerBoard.AmountOfCards + NewGameState.KrupierBoard.AmountOfCards == 3)
+                        {
+                            NewGameState.ChangePlayer();
+                            NewGameState.ChangePlayer2();
+                        }
+
+                        NewGameState.CheckWin();
+                        CalculateCoursesValues(NewGameState);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _GameState.Courses.Count; i++)
+                {
+                    if (_GameState.Courses[i].IsWin)
+                    {
+                        if (i == 0)
+                        {
+                            int z = 0;
+                        }
+                        CoursesValues[i]++;
+                    }
+                }
+                AllVariants++;
+            }
         }
-        private float ThirdCardsCourse(int PlayerPoints, int DealerPoints)
+
+
+        public BetCounter Copy(GameState gamestate)
         {
-
+            BetCounter _NewBetCounter=new BetCounter(false);
+            for(int k = 0; k < 13; k++)
+            {
+                _NewBetCounter.AmountOfCards[k] = gamestate._BetCounter.AmountOfCards[k];
+            }
+            return _NewBetCounter;
         }
-
-        private float FourCardsCourse(int PlayerPoints, int DealerPoints)
-        {
-
-        }
-
-        private float FiveCardsCourse(int PlayerPoints, int DealerPoints)
-        {
-
-        }
-
-        private float PlayerWin(int PlayerPoints, int DealerPoints)
-        {
-
-        }
-
-        private float DealerWin(int PlayerPoints, int DealerPoints)
-        {
-
-        }
-
-        private float Draw(int PlayerPoints, int DealerPoints)
-        {
-
-        }
-  */
     }
 }

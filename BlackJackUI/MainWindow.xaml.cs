@@ -11,12 +11,10 @@ using System.Windows.Shapes;
 using BlackJackLogic;
 
 /*CO ZROBIC TRZEBA:
- * a) przetestowac sprawdzanie wygranej (cos z blackjackiem mozliwe)
  * b) liczenie kursow 
  * c) zaokraglanie pieniedzy, betow do 2 miejsc po przecinku
  * d) ladnijesze gui przyciskow
  * e) background na czerwono przyciskow jak nie mozna stawiac zakladow
- * f) obsluga zasady z asem w grze
  */
 
 namespace BlackJackUI
@@ -40,7 +38,7 @@ namespace BlackJackUI
             viewModel = new GameViewModel();
             DataContext = viewModel;
 
-            gameState = new GameState(Board.Initial(), Board.Initial());
+            gameState = new GameState(Board.Initial(), Board.Initial(),true,true);
             DrawBoard();
         }
 
@@ -90,6 +88,7 @@ namespace BlackJackUI
         private async void GameLoop()
         {
             UpdateViewModel();
+            //gameState.ActualizeCourses();
             UpdateCourses();
             gameState.CanBet = true;
             await DelayCountdown(10);
@@ -111,9 +110,10 @@ namespace BlackJackUI
             gameState.CheckWin();
             if (!gameState.IsGameEnded)
             {
-                UpdateCourses();
                 gameState.ChangePlayer();
                 gameState.ChangePlayer2();
+                gameState.ActualizeCourses();
+                UpdateCourses();
                 gameState.CanBet = true;
                 await DelayCountdown(5);
             }
@@ -185,15 +185,16 @@ namespace BlackJackUI
 
         private void UpdateCourses()
         {
-            viewModel.OneCardCourse = 1.23f;
-            viewModel.TwoCardCourse = 1.33f;
-            viewModel.ThreeCardCourse = 1.28f;
-            viewModel.FourCardCourse = 1.25f;
-            viewModel.FiveCardCourse = 1.55f;
-            viewModel.PlayerWinCourse = 1.28f;
-            viewModel.DealerWinCourse = 1.25f;
-            viewModel.BlackJackWinCourse = 1.55f;
-            viewModel.DrawWinCourse = 1.66f;
+
+            viewModel.OneCardCourse = gameState.Courses[0]._CourseValue;
+            viewModel.TwoCardCourse = gameState.Courses[1]._CourseValue;
+            viewModel.ThreeCardCourse = gameState.Courses[2]._CourseValue;
+            viewModel.FourCardCourse = gameState.Courses[3]._CourseValue; 
+            viewModel.FiveCardCourse = gameState.Courses[4]._CourseValue; 
+            viewModel.PlayerWinCourse = gameState.Courses[6]._CourseValue; 
+            viewModel.DealerWinCourse = gameState.Courses[7]._CourseValue; 
+            viewModel.BlackJackWinCourse = gameState.Courses[5]._CourseValue;
+            viewModel.DrawWinCourse = gameState.Courses[8]._CourseValue; 
 
             viewModel.PlayerMoney = gameState.PlayerMoney;
         }
