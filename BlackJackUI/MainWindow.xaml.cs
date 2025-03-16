@@ -11,17 +11,13 @@ using System.Windows.Shapes;
 using BlackJackLogic;
 
 /*CO ZROBIC TRZEBA:
- * b) liczenie kursow 
- * c) zaokraglanie pieniedzy, betow do 2 miejsc po przecinku
- * d) ladnijesze gui przyciskow
- * e) background na czerwono przyciskow jak nie mozna stawiac zakladow
+ * a) liczenie kursow 
+ * b) background na czerwono przyciskow jak nie mozna stawiac zakladow
+ * c) refraktoryzacja kodu
  */
 
 namespace BlackJackUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly Image[,] PlayerCardImages = new Image[2, 5];
@@ -158,15 +154,15 @@ namespace BlackJackUI
 
         private void ResetAllButtons()
         {
-            OneCardsButton.Background = new SolidColorBrush(Colors.Black);
-            TwoCardsButton.Background = new SolidColorBrush(Colors.Black);
-            ThreeCardsButton.Background = new SolidColorBrush(Colors.Black);
-            FourCardsButton.Background = new SolidColorBrush(Colors.Black);
-            FiveCardsButton.Background = new SolidColorBrush(Colors.Black);
-            BlackJackWinButton.Background = new SolidColorBrush(Colors.Black);
-            DealerWinButton.Background = new SolidColorBrush(Colors.Black);
-            PlayerWinButton.Background = new SolidColorBrush(Colors.Black);
-            DrawWinButton.Background = new SolidColorBrush(Colors.Black);
+            OneCardsButton.Background = new SolidColorBrush(Colors.White);
+            TwoCardsButton.Background = new SolidColorBrush(Colors.White);
+            ThreeCardsButton.Background = new SolidColorBrush(Colors.White);
+            FourCardsButton.Background = new SolidColorBrush(Colors.White);
+            FiveCardsButton.Background = new SolidColorBrush(Colors.White);
+            BlackJackWinButton.Background = new SolidColorBrush(Colors.White);
+            DealerWinButton.Background = new SolidColorBrush(Colors.White);
+            PlayerWinButton.Background = new SolidColorBrush(Colors.White);
+            DrawWinButton.Background = new SolidColorBrush(Colors.White);
         }
 
 
@@ -202,6 +198,7 @@ namespace BlackJackUI
         private void BetOnOneCard(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -214,6 +211,7 @@ namespace BlackJackUI
         private void BetOnTwoCard(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -225,6 +223,7 @@ namespace BlackJackUI
         private void BetOnThreeCard(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -240,6 +239,7 @@ namespace BlackJackUI
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
+                betAmount = (float)Math.Round(betAmount, 2);
                 gameState.PlayerMoney -= betAmount;
                 gameState.Courses[3].PlayerBet += betAmount;
                 viewModel.PlayerMoney = gameState.PlayerMoney;
@@ -249,6 +249,7 @@ namespace BlackJackUI
         private void BetOnFiveCard(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -261,6 +262,7 @@ namespace BlackJackUI
         private void BetOnPlayerWin(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -273,6 +275,7 @@ namespace BlackJackUI
         private void BetOnDealerWin(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -286,6 +289,7 @@ namespace BlackJackUI
         private void BetOnBlackJackWin(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -298,6 +302,7 @@ namespace BlackJackUI
         private void BetOnDrawWin(object sender, RoutedEventArgs e)
         {
             float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            betAmount = (float)Math.Round(betAmount, 2);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {

@@ -46,19 +46,23 @@
                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="481,272,0,0"/>
 
         <!-- Pola tekstowe na kursy do obstawienia -->
-        <Button Name="OneCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" 
+        <Button Name="OneCardsButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0" 
          Click="BetOnOneCard">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                             
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -72,24 +76,28 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Wygrana jedną kartą: " />
+                <TextBlock Text="Wygrana jedną kartą     " />
                 <TextBlock Text="{Binding OneCardCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="TwoCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0"
+        <Button Name="TwoCardsButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,140,0,0"
          Click="BetOnTwoCard">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                                
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -103,24 +111,28 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Wygrana 2 kartami: " />
+                <TextBlock Text="Wygrana 2 kartami        " />
                 <TextBlock Text="{Binding TwoCardCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="ThreeCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,150,0,0"
+        <Button Name="ThreeCardsButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,180,0,0"
         Click="BetOnThreeCard">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                              
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -134,24 +146,28 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Wygrana 3 kartami: " />
+                <TextBlock Text="Wygrana 3 kartami        " />
                 <TextBlock Text="{Binding ThreeCardCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="FourCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,200,0,0"
+        <Button Name="FourCardsButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,220,0,0"
         Click="BetOnFourCard">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                             
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -165,24 +181,28 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Wygrana 4 kartami: " />
+                <TextBlock Text="Wygrana 4 kartami        " />
                 <TextBlock Text="{Binding FourCardCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="FiveCardsButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,250,0,0"
+        <Button Name="FiveCardsButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,260,0,0"
         Click="BetOnFiveCard">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                                 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -196,24 +216,28 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Wygrana 5 kartami: " />
+                <TextBlock Text="Wygrana 5 kartami        " />
                 <TextBlock Text="{Binding FiveCardCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="PlayerWinButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
+        <Button Name="PlayerWinButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,300,0,0"
         Click="BetOnPlayerWin">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                                
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -227,24 +251,29 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Wygra gracz: " />
+                <TextBlock Text="Wygra gracz                   " />
                 <TextBlock Text="{Binding PlayerWinCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="DealerWinButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,350,0,0"
+        <Button Name="DealerWinButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,340,0,0"
         Click="BetOnDealerWin">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
+                                    
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -258,24 +287,28 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Krupier wygra: " />
+                <TextBlock Text="Krupier wygra                " />
                 <TextBlock Text="{Binding DealerWinCourse}" />
             </StackPanel>
         </Button>
 
-        <Button Name="BlackJackWinButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,400,0,0"
+        <Button Name="BlackJackWinButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,380,0,0"
         Click="BetOnBlackJackWin">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -289,25 +322,29 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="BlackJack: " />
+                <TextBlock Text="BlackJack                        " />
                 <TextBlock Text="{Binding BlackJackWinCourse}" />
             </StackPanel>
         </Button>
 
 
-        <Button Name="DrawWinButton" FontSize="15" FontWeight="Bold" Padding="5"
-        Foreground="White" Background="#B0000000"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,450,0,0"
+        <Button Name="DrawWinButton" FontSize="13" FontWeight="Bold" Padding="5"
+        Foreground="Black" Background="White"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,420,0,0"
         Click="BetOnDrawWin">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#B0000000"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="5">
+                                <Border Background="{TemplateBinding Background}"                               
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="10" Padding="5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -321,7 +358,7 @@
                 </Style>
             </Button.Style>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="wygrana przez remis: " />
+                <TextBlock Text="Wygrana przez remis     " />
                 <TextBlock Text="{Binding DrawWinCourse}" />
             </StackPanel>
         </Button>
@@ -330,12 +367,41 @@
                  HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                  Margin="797,0,0,64" TextAlignment="Center"/>
 
-        <!-- Przycisk Start -->
-        <Button Name="StartButton" Content="Start" Width="120" Height="50" 
-                HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                Margin="797,0,0,222" Click="StartButton_Click"
-                Background="DarkGreen" Foreground="Black" FontSize="16" 
-                FontWeight="Bold" BorderThickness="3" BorderBrush="Black"
-                Padding="10"/>
+        <Button Name="StartButton" Width="120" Height="50" 
+        HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+        Margin="797,0,0,222" Click="StartButton_Click"
+        Background="DarkGreen" Foreground="Black" FontSize="16" 
+        FontWeight="Bold"
+        Padding="10">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="22" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Start" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

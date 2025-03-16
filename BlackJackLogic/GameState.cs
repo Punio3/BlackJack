@@ -230,6 +230,7 @@ namespace BlackJackLogic
                 if (Courses[i].IsWin)
                 {
                     PlayerMoney += Courses[i].PlayerBet * Courses[i]._CourseValue;
+                    PlayerMoney = (float)Math.Round(PlayerMoney, 2);
                     Courses[i].IsWin = false;
                 }
                 Courses[i].PlayerBet = 0;
@@ -262,7 +263,9 @@ namespace BlackJackLogic
             for(int i=0; i<Courses.Count;i++)
             {
                 Courses[i]._CourseValue =(float)( 1 / (_BetCounter.CoursesValues[i] / (float)_BetCounter.AllVariants));
+                Courses[i]._CourseValue = (float)Math.Round(Courses[i]._CourseValue, 2);
             }
+            
         }
 
         public GameState CopyGameState()
