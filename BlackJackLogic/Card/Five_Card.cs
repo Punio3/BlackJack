@@ -14,6 +14,9 @@ namespace BlackJackLogic
         {
             return new Five_Card(Symbol);
         }
-
+        public override string CardToString()
+        {
+            return "5-" + CardSymbolToString();
+        }
     }
 }

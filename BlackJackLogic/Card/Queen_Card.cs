@@ -14,6 +14,9 @@ namespace BlackJackLogic
         {
             return new Queen_Card(Symbol);
         }
-
+        public override string CardToString()
+        {
+            return "Q-" + CardSymbolToString();
+        }
     }
 }

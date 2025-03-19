@@ -5,6 +5,10 @@ using BlackJackLogic;
 
 namespace BlackJackUI
 {
+    /*
+    a) dodac przycisk pokaz ostatnie gry
+    c) zapisywanie gier do bazy i zczytywanie ich ( mozliwe nowe okno z widokiem tego )
+    */
     public partial class MainWindow : Window
     {
         private readonly Image[,] PlayerCardImages = new Image[2, 5];
@@ -12,9 +16,10 @@ namespace BlackJackUI
 
         private GameState gameState;
         private GameViewModel viewModel;
-
+        private bool StopGame;
         public MainWindow()
         {
+            StopGame = false;
             InitializeComponent();
             InitalizeBoard();
 
@@ -22,6 +27,7 @@ namespace BlackJackUI
             DataContext = viewModel;
 
             gameState = new GameState(Board.Initial(), Board.Initial());
+
             DrawBoard();
         }
 
@@ -70,48 +76,52 @@ namespace BlackJackUI
 
         private async void GameLoop()
         {
-            UpdateViewModel();
-            gameState.CanBet = true;
-
-            await DelayCountdown(10);
-
-            gameState.CanBet = false;
-
-            for (int i = 0; i < 3; i++)
+            if (StopGame)
             {
-                gameState.AddCard();
                 UpdateViewModel();
-                DrawBoard();
-                gameState.ChangePlayer_Phase1();
-                if (i != 2)
+                gameState.CanBet = true;
+
+                await DelayCountdown(10);
+
+                gameState.CanBet = false;
+
+                for (int i = 0; i < 3; i++)
                 {
-                    await DelayCountdown(2);
+                    gameState.AddCard();
+                    UpdateViewModel();
+                    DrawBoard();
+                    gameState.ChangePlayer_Phase1();
+                    if (i != 2)
+                    {
+                        await DelayCountdown(2);
+                    }
                 }
-            }
 
-            gameState.CheckWin();
-
-            gameState.ChangePlayer_Phase1();
-            gameState.ChangePlayer_Phase2();
-
-            while (!gameState.IsGameEnded)
-            {
-                await DelayCountdown(3);
-
-                gameState.AddCard();
-                UpdateViewModel();
-                DrawBoard();
                 gameState.CheckWin();
+
+                gameState.ChangePlayer_Phase1();
                 gameState.ChangePlayer_Phase2();
+
+                while (!gameState.IsGameEnded)
+                {
+                    await DelayCountdown(3);
+
+                    gameState.AddCard();
+                    UpdateViewModel();
+                    DrawBoard();
+                    gameState.CheckWin();
+                    gameState.ChangePlayer_Phase2();
+                }
+
+                MakeGoldWinCourses();
+                await DelayCountdown(5);
+                ResetAllButtons();
+
+                gameState.CreateNewGame();
+                DrawBoard();
+                UpdateViewModel();
+                GameLoop();
             }
-
-            MakeGoldWinCourses();
-            await DelayCountdown(5);
-            ResetAllButtons();
-
-            gameState.CreateNewGame();
-            DrawBoard();
-            GameLoop();
         }
 
         private void MakeGoldWinCourses()
@@ -144,9 +154,28 @@ namespace BlackJackUI
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            StartButton.Background = new SolidColorBrush(Colors.Red);
-            UpdateCoursesText();
-            GameLoop();
+            if (!StopGame)
+            {
+                StartButton.Background = new SolidColorBrush(Colors.Red);
+                UpdateCoursesText();
+                StopGame = true;
+                GameLoop();
+            }
+            else
+            {
+                StopGame = false;
+                StartButton.Background = new SolidColorBrush(Colors.Green);
+            }
+        }
+
+        private void PrevGames_Click(object sender, RoutedEventArgs e)
+        {
+            List<GameData> list = gameState.GiveAllPreviousBets();
+
+            foreach(GameData gameData in list)
+            {
+                MessageBox.Show("Player1: " + gameData.Player1Cards + "   Player2: " + gameData.Player2Cards + "   Bet: " + gameData.BetAmount);
+            }
         }
 
         private void UpdateCoursesText()
@@ -173,8 +202,7 @@ namespace BlackJackUI
 
         private void BetOnOneCard(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -186,8 +214,7 @@ namespace BlackJackUI
 
         private void BetOnTwoCard(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -198,8 +225,7 @@ namespace BlackJackUI
         }
         private void BetOnThreeCard(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -211,11 +237,10 @@ namespace BlackJackUI
 
         private void BetOnFourCard(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
-                betAmount = (float)Math.Round(betAmount, 2);
                 gameState.PlayerMoney -= betAmount;
                 gameState.Courses[3].PlayerBet += betAmount;
                 viewModel.PlayerMoney = gameState.PlayerMoney;
@@ -224,8 +249,7 @@ namespace BlackJackUI
         }
         private void BetOnFiveCard(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -237,8 +261,7 @@ namespace BlackJackUI
         }
         private void BetOnPlayerWin(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -250,8 +273,7 @@ namespace BlackJackUI
         }
         private void BetOnDealerWin(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -264,8 +286,7 @@ namespace BlackJackUI
 
         private void BetOnBlackJackWin(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {
@@ -277,8 +298,7 @@ namespace BlackJackUI
         }
         private void BetOnDrawWin(object sender, RoutedEventArgs e)
         {
-            float.TryParse(BetAmountTextBox.Text, out float betAmount);
-            betAmount = (float)Math.Round(betAmount, 2);
+            int.TryParse(BetAmountTextBox.Text, out int betAmount);
 
             if (gameState.CanBet && gameState.CheckCanBet(betAmount))
             {

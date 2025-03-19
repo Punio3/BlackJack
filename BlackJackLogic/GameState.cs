@@ -12,6 +12,7 @@ namespace BlackJackLogic
         public bool IsGameEnded { get; set; }
         public bool CanBet {  get; set; }
         public Course[] Courses { get; set; }
+        private Database _DataBase {  get; set; }
 
 
         public GameState(Board playerboard, Board dealerboard)
@@ -26,6 +27,9 @@ namespace BlackJackLogic
             AllCards = new List<Card>();
             AddAllCards();
             SetCoursesValues();
+            _DataBase=new Database();
+
+            _DataBase.Initialize();
         }
         private void SetCoursesValues()
         {
@@ -181,6 +185,38 @@ namespace BlackJackLogic
             {
                 if (DealerBoard.AmountOfCards < 6) Courses[DealerBoard.AmountOfCards - 1].IsWin = true;
             }
+            AddGameToDataBase();
+        }
+
+        private void AddGameToDataBase()
+        {
+            string PlayerCards = "";
+            for(int k=0;k<PlayerBoard.AmountOfCards-1;k++)
+            {
+                PlayerCards += PlayerBoard[k].CardToString();
+                PlayerCards += ",";
+            }
+            PlayerCards += PlayerBoard[PlayerBoard.AmountOfCards -1].CardToString();
+
+            string DealerCards = "";
+            for (int k = 0; k < DealerBoard.AmountOfCards-1; k++)
+            {
+                DealerCards += DealerBoard[k].CardToString();
+                DealerCards += ",";
+            }
+            DealerCards += DealerBoard[DealerBoard.AmountOfCards - 1].CardToString();
+
+            int Sum = 0;
+            for(int k=0;k<Courses.Length;k++)
+            {
+                Sum += Courses[k].PlayerBet; 
+            }
+            _DataBase.SaveGameData(PlayerCards, DealerCards, Sum);
+        }
+
+        public List<GameData> GiveAllPreviousBets()
+        {
+            return _DataBase.GetAllGameData();
         }
 
         public bool CheckCanBet(float money)

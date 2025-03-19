@@ -14,6 +14,9 @@ namespace BlackJackLogic
         {
             return new Nine_Card(Symbol);
         }
-
+        public override string CardToString()
+        {
+            return "9-" + CardSymbolToString();
+        }
     }
 }

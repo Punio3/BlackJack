@@ -16,5 +16,10 @@ namespace BlackJackLogic
             return new Ass_Card(Symbol);
         }
 
+        public override string CardToString()
+        {
+            return "A" + CardSymbolToString();
+        }
+
     }
 }

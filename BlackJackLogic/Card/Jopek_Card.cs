@@ -14,6 +14,9 @@ namespace BlackJackLogic
         {
             return new Jopek_Card(Symbol);
         }
-
+        public override string CardToString()
+        {
+            return "J-" + CardSymbolToString();
+        }
     }
 }
