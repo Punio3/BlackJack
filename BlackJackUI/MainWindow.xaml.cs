@@ -1,20 +1,7 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BlackJackLogic;
-
-/*CO ZROBIC TRZEBA:
- * a) liczenie kursow 
- * b) background na czerwono przyciskow jak nie mozna stawiac zakladow
- * c) refraktoryzacja kodu
- */
 
 namespace BlackJackUI
 {
@@ -34,30 +21,29 @@ namespace BlackJackUI
             viewModel = new GameViewModel();
             DataContext = viewModel;
 
-            gameState = new GameState(Board.Initial(), Board.Initial(),true,true);
+            gameState = new GameState(Board.Initial(), Board.Initial());
             DrawBoard();
         }
 
         private void InitalizeBoard()
         {
-            for(int i=0;i<2;i++)
+            for(int i = 0; i < 2; i++)
             {
                 for(int j = 0; j < 5; j++)
                 {
                     Image image = new Image();
-                    Image image2 = new Image();
-
                     image.Width = 50;
                     image.Height = 60;
-                    image2.Width = 50;
-                    image2.Height = 60;
 
                     PlayerCardImages[i,j] = image;
                     CardGrid_Gracz.Children.Add(image);
 
+                    image = new Image();
+                    image.Width = 50;
+                    image.Height = 60;
 
-                    KrupierCardImages[i, j] = image2;
-                    CardGrid_Krupier.Children.Add(image2);
+                    KrupierCardImages[i, j] = image;
+                    CardGrid_Krupier.Children.Add(image);
                 }
             }
         }
@@ -66,7 +52,7 @@ namespace BlackJackUI
         {
             for(int i=0;i<10;i++) {
                 Card card = gameState.PlayerBoard[i];
-                Card card2= gameState.KrupierBoard[i];
+                Card card2= gameState.DealerBoard[i];
 
                 PlayerCardImages[i / 5, i % 5].Source = Images.GetImage(card);
                 KrupierCardImages[i / 5, i % 5].Source = Images.GetImage(card2);
@@ -81,53 +67,43 @@ namespace BlackJackUI
                 await Task.Delay(1000);
             }
         }
+
         private async void GameLoop()
         {
             UpdateViewModel();
-            //gameState.ActualizeCourses();
-            UpdateCourses();
             gameState.CanBet = true;
+
             await DelayCountdown(10);
 
             gameState.CanBet = false;
+
             for (int i = 0; i < 3; i++)
             {
                 gameState.AddCard();
                 UpdateViewModel();
                 DrawBoard();
-                gameState.ChangePlayer();
+                gameState.ChangePlayer_Phase1();
                 if (i != 2)
                 {
                     await DelayCountdown(2);
                 }
             }
 
-
             gameState.CheckWin();
-            if (!gameState.IsGameEnded)
-            {
-                gameState.ChangePlayer();
-                gameState.ChangePlayer2();
-                gameState.ActualizeCourses();
-                UpdateCourses();
-                gameState.CanBet = true;
-                await DelayCountdown(5);
-            }
-            gameState.CanBet = false;
+
+            gameState.ChangePlayer_Phase1();
+            gameState.ChangePlayer_Phase2();
+
             while (!gameState.IsGameEnded)
             {
+                await DelayCountdown(3);
+
                 gameState.AddCard();
                 UpdateViewModel();
                 DrawBoard();
                 gameState.CheckWin();
-                gameState.ChangePlayer2();
-
-                if (!gameState.IsGameEnded)
-                {
-                    await DelayCountdown(3);
-                }
+                gameState.ChangePlayer_Phase2();
             }
-
 
             MakeGoldWinCourses();
             await DelayCountdown(5);
@@ -168,29 +144,29 @@ namespace BlackJackUI
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            StartButton.Background = new SolidColorBrush(Colors.Red); 
+            StartButton.Background = new SolidColorBrush(Colors.Red);
+            UpdateCoursesText();
             GameLoop();
         }
 
+        private void UpdateCoursesText()
+        {
+            viewModel.OneCardCourse = gameState.Courses[0]._CourseValue;
+            viewModel.TwoCardCourse = gameState.Courses[1]._CourseValue;
+            viewModel.ThreeCardCourse = gameState.Courses[2]._CourseValue;
+            viewModel.FourCardCourse = gameState.Courses[3]._CourseValue;
+            viewModel.FiveCardCourse = gameState.Courses[4]._CourseValue;
+            viewModel.PlayerWinCourse = gameState.Courses[6]._CourseValue;
+            viewModel.DealerWinCourse = gameState.Courses[7]._CourseValue;
+            viewModel.BlackJackWinCourse = gameState.Courses[5]._CourseValue;
+            viewModel.DrawWinCourse = gameState.Courses[8]._CourseValue;
+
+        }
 
         private void UpdateViewModel()
         {
             viewModel.PlayerScore = gameState.PlayerBoard.AmountOfPoints;
-            viewModel.DealerScore = gameState.KrupierBoard.AmountOfPoints;
-        }
-
-        private void UpdateCourses()
-        {
-
-            viewModel.OneCardCourse = gameState.Courses[0]._CourseValue;
-            viewModel.TwoCardCourse = gameState.Courses[1]._CourseValue;
-            viewModel.ThreeCardCourse = gameState.Courses[2]._CourseValue;
-            viewModel.FourCardCourse = gameState.Courses[3]._CourseValue; 
-            viewModel.FiveCardCourse = gameState.Courses[4]._CourseValue; 
-            viewModel.PlayerWinCourse = gameState.Courses[6]._CourseValue; 
-            viewModel.DealerWinCourse = gameState.Courses[7]._CourseValue; 
-            viewModel.BlackJackWinCourse = gameState.Courses[5]._CourseValue;
-            viewModel.DrawWinCourse = gameState.Courses[8]._CourseValue; 
+            viewModel.DealerScore = gameState.DealerBoard.AmountOfPoints;
 
             viewModel.PlayerMoney = gameState.PlayerMoney;
         }

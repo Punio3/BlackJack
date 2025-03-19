@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BlackJackLogic
 {
     public class Three_Card : Card
@@ -14,6 +9,10 @@ namespace BlackJackLogic
         public Three_Card(CardSymbol symbol)
         {
             Symbol = symbol;
+        }
+        public override Card Copy()
+        {
+            return new Three_Card(Symbol);
         }
 
     }
