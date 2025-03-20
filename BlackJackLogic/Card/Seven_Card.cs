@@ -16,7 +16,7 @@ namespace BlackJackLogic
         }
         public override string CardToString()
         {
-            return "7-" + CardSymbolToString();
+            return "7" + CardSymbolToString();
         }
     }
 }

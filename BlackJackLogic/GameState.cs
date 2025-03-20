@@ -194,7 +194,6 @@ namespace BlackJackLogic
             for(int k=0;k<PlayerBoard.AmountOfCards-1;k++)
             {
                 PlayerCards += PlayerBoard[k].CardToString();
-                PlayerCards += ",";
             }
             PlayerCards += PlayerBoard[PlayerBoard.AmountOfCards -1].CardToString();
 
@@ -202,7 +201,6 @@ namespace BlackJackLogic
             for (int k = 0; k < DealerBoard.AmountOfCards-1; k++)
             {
                 DealerCards += DealerBoard[k].CardToString();
-                DealerCards += ",";
             }
             DealerCards += DealerBoard[DealerBoard.AmountOfCards - 1].CardToString();
 

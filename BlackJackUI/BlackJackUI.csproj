@@ -23,6 +23,8 @@
     <None Remove="Assets\Clubs\Jclub.png" />
     <None Remove="Assets\Clubs\Kclub.png" />
     <None Remove="Assets\Clubs\Q.png" />
+    <None Remove="Assets\Courses_BG.png" />
+    <None Remove="Assets\Courses_BG2.png" />
     <None Remove="Assets\Diamonds\10diamond.png" />
     <None Remove="Assets\Diamonds\2diamond.png" />
     <None Remove="Assets\Diamonds\3diamond.png" />
@@ -83,6 +85,8 @@
     <Resource Include="Assets\Clubs\Jclub.png" />
     <Resource Include="Assets\Clubs\Kclub.png" />
     <Resource Include="Assets\Clubs\Q.png" />
+    <Resource Include="Assets\Courses_BG.png" />
+    <Resource Include="Assets\Courses_BG2.png" />
     <Resource Include="Assets\Diamonds\10diamond.png" />
     <Resource Include="Assets\Diamonds\2diamond.png" />
     <Resource Include="Assets\Diamonds\3diamond.png" />

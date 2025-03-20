@@ -171,11 +171,8 @@ namespace BlackJackUI
         private void PrevGames_Click(object sender, RoutedEventArgs e)
         {
             List<GameData> list = gameState.GiveAllPreviousBets();
-
-            foreach(GameData gameData in list)
-            {
-                MessageBox.Show("Player1: " + gameData.Player1Cards + "   Player2: " + gameData.Player2Cards + "   Bet: " + gameData.BetAmount);
-            }
+            LastCourses secondWindow = new LastCourses(list);
+            secondWindow.Show();
         }
 
         private void UpdateCoursesText()
