@@ -23,6 +23,13 @@
 
         </UniformGrid>
 
+        <TextBlock Text="{Binding PageNumber, StringFormat=' {0}'}"
+           FontSize="18" FontWeight="Bold"
+           Foreground="White" Padding="5"
+           HorizontalAlignment="Left" VerticalAlignment="Top"
+           Margin="95,448,0,0" Width="42" 
+           TextAlignment="Center" TextWrapping="Wrap"/>
+
         <Button Name="Left_Button" Width="70" Height="40" 
       HorizontalAlignment="Left" VerticalAlignment="Bottom" 
       Margin="18,0,0,37" Click="Left_Button_Click"
@@ -96,7 +103,60 @@
                 <TextBlock Text="Next" />
             </StackPanel>
         </Button>
+        
+        <Grid Name="PlayerResultsGrid" HorizontalAlignment="Left" VerticalAlignment="Top"
+      Margin="5,57,0,0" Width="40" Height="388">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
 
+            <TextBlock Text="{Binding PlayerScore1}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="0"/>
+            <TextBlock Text="{Binding PlayerScore2}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBlock Text="{Binding PlayerScore3}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="2"/>
+            <TextBlock Text="{Binding PlayerScore4}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="3"/>
+            <TextBlock Text="{Binding PlayerScore5}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="4"/>
+        </Grid>
+
+        <Grid Name="DealerResultsGrid" HorizontalAlignment="Left" VerticalAlignment="Top"
+      Margin="435,57,0,0" Width="30" Height="388">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding DealerScore1}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="0"/>
+            <TextBlock Text="{Binding DealerScore2}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBlock Text="{Binding DealerScore3}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="2"/>
+            <TextBlock Text="{Binding DealerScore4}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="3"/>
+            <TextBlock Text="{Binding DealerScore5}" FontSize="16" Foreground="White"
+               TextAlignment="Center" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Grid.Row="4"/>
+        </Grid>
     </Grid>
-    
+
 </Window>

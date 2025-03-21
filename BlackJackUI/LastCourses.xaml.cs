@@ -1,17 +1,6 @@
 ﻿using BlackJackLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BlackJackUI
 {
@@ -23,6 +12,7 @@ namespace BlackJackUI
         private readonly Image[,] PlayerCardImages = new Image[5, 9];
         private readonly Image[,] KrupierCardImages = new Image[5, 9];
 
+        private LastCourseViewModel viewModel;
         private List<GameData> PrevGamesList { get; set; }
         private int ActualPage { get; set; }
         public LastCourses(List<GameData> prevGamesList)
@@ -30,10 +20,13 @@ namespace BlackJackUI
             InitializeComponent();
             InitalizeBoard();
 
+            viewModel=new LastCourseViewModel();
+            DataContext = viewModel;
 
             PrevGamesList = prevGamesList;
             ActualPage = 0;
 
+            viewModel.PageNumber = ActualPage+1;
             DisplayCardsFromPage(ActualPage);
         }
 
@@ -69,6 +62,7 @@ namespace BlackJackUI
                 ActualPage++;
                 DisplayCardsFromPage(ActualPage);
             }
+            viewModel.PageNumber = ActualPage + 1;
         }
 
         private void Left_Button_Click(object sender, RoutedEventArgs e)
@@ -79,6 +73,7 @@ namespace BlackJackUI
                 ActualPage--;
                 DisplayCardsFromPage(ActualPage);
             }
+            viewModel.PageNumber = ActualPage + 1;
         }
 
         private void DisplayCardsFromPage(int PageNumber)
@@ -86,14 +81,9 @@ namespace BlackJackUI
             if (PrevGamesList.Count != 0)
             {
                 int size = 0;
-                if (PrevGamesList.Count - (PageNumber * 5 + 5) < 0)
-                {
-                    size = PrevGamesList.Count % 5;
-                }
-                else
-                {
-                    size = 5;
-                }
+                if (PrevGamesList.Count - ((PageNumber + 1) * 5) < 0)  size = PrevGamesList.Count % 5;                
+                else  size = 5;
+                
 
                 for (int i = PageNumber * 5; i < PageNumber * 5 + size ; i++)
                 {
@@ -101,14 +91,14 @@ namespace BlackJackUI
                     GameData data = PrevGamesList[i];
                     for (int k = 0; k < data.Player1Cards.Length / 2; k++)
                     {
-                        PlayerCardImages[i%5, k].Source = Images.GetImage(GiveCardFromString(data.Player1Cards[k * 2], data.Player1Cards[k * 2 + 1]));
+                        PlayerCardImages[i % 5, k].Source = Images.GetImage(GiveCardFromString(data.Player1Cards[k * 2], data.Player1Cards[k * 2 + 1]));
                     }
 
                     for (int k = 0; k < data.Player2Cards.Length / 2; k++)
                     {
-                        KrupierCardImages[i%5, k].Source = Images.GetImage(GiveCardFromString(data.Player2Cards[k * 2], data.Player2Cards[k * 2 + 1]));
+                        KrupierCardImages[i % 5, k].Source = Images.GetImage(GiveCardFromString(data.Player2Cards[k * 2], data.Player2Cards[k * 2 + 1]));
                     }
-
+                    viewModel.SetScores(i % 5 + 1, data.Player1_Points, data.Player2_Points);
                 }
             }
         }
@@ -118,15 +108,9 @@ namespace BlackJackUI
             if (PrevGamesList.Count != 0)
             {
                 int size = 0;
-                if (PrevGamesList.Count - (PageNumber * 5 + 5) < 0)
-                {
-                    size = PrevGamesList.Count % 5;
-                }
-                else
-                {
-                    size = 5;
-                }
-
+                if (PrevGamesList.Count - ((PageNumber +1) * 5) < 0) size = PrevGamesList.Count % 5;               
+                else size = 5;
+                
                 for (int i = PageNumber * 5; i < PageNumber * 5 + size; i++)
                 {
 
@@ -140,7 +124,7 @@ namespace BlackJackUI
                     {
                         KrupierCardImages[i % 5, k].Source = null;
                     }
-
+                    viewModel.SetScores(i % 5 + 1, -1, -1);
                 }
             }
         }

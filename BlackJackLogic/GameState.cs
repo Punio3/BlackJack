@@ -209,7 +209,7 @@ namespace BlackJackLogic
             {
                 Sum += Courses[k].PlayerBet; 
             }
-            _DataBase.SaveGameData(PlayerCards, DealerCards, Sum);
+            _DataBase.SaveGameData(PlayerCards, DealerCards, Sum, PlayerBoard.AmountOfPoints, DealerBoard.AmountOfPoints);
         }
 
         public List<GameData> GiveAllPreviousBets()

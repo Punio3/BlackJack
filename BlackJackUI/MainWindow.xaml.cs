@@ -17,9 +17,11 @@ namespace BlackJackUI
         private GameState gameState;
         private GameViewModel viewModel;
         private bool StopGame;
+        private bool CanStartGame;
         public MainWindow()
         {
             StopGame = false;
+            CanStartGame = true;
             InitializeComponent();
             InitalizeBoard();
 
@@ -78,6 +80,7 @@ namespace BlackJackUI
         {
             if (StopGame)
             {
+                CanStartGame = false;
                 UpdateViewModel();
                 gameState.CanBet = true;
 
@@ -120,8 +123,10 @@ namespace BlackJackUI
                 gameState.CreateNewGame();
                 DrawBoard();
                 UpdateViewModel();
+                CanStartGame = true;
                 GameLoop();
             }
+
         }
 
         private void MakeGoldWinCourses()
@@ -154,17 +159,17 @@ namespace BlackJackUI
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!StopGame)
+            if (StopGame)
+            {
+                StopGame = false;
+                StartButton.Background = new SolidColorBrush(Colors.Green);
+            }
+            if (CanStartGame)
             {
                 StartButton.Background = new SolidColorBrush(Colors.Red);
                 UpdateCoursesText();
                 StopGame = true;
                 GameLoop();
-            }
-            else
-            {
-                StopGame = false;
-                StartButton.Background = new SolidColorBrush(Colors.Green);
             }
         }
 

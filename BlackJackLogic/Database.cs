@@ -21,7 +21,9 @@ namespace BlackJackLogic
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Player1_Cards TEXT NOT NULL, -- Lista kart gracza 1
                     Player2_Cards TEXT NOT NULL, -- Lista kart gracza 2
-                    BetAmount INTEGER NOT NULL   -- Kwota postawiona
+                    BetAmount INTEGER NOT NULL,   -- Kwota postawiona
+                    Player1_Points INTEGER NOT NULL,
+                    Player2_Points INTEGER NOT NULL
                     );";
 
                     using (var command = new SqliteCommand(tableCommand, connection))
@@ -32,7 +34,7 @@ namespace BlackJackLogic
             }
         }
 
-        public void SaveGameData(string player1Cards, string player2Cards, int betAmount)
+        public void SaveGameData(string player1Cards, string player2Cards, int betAmount, int Player1Points, int Player2Points)
         {
             try
             {
@@ -42,8 +44,8 @@ namespace BlackJackLogic
 
                     // Zapytanie INSERT do zapisania danych w tabeli
                     string insertCommand = @"
-                                        INSERT INTO GameData (Player1_Cards, Player2_Cards, BetAmount)
-                                        VALUES (@Player1_Cards, @Player2_Cards, @BetAmount);";
+                                        INSERT INTO GameData (Player1_Cards, Player2_Cards, BetAmount, Player1_Points, Player2_Points)
+                                        VALUES (@Player1_Cards, @Player2_Cards, @BetAmount, @Player1_Points, @Player2_Points);";
 
                     using (var command = new SqliteCommand(insertCommand, connection))
                     {
@@ -51,6 +53,8 @@ namespace BlackJackLogic
                         command.Parameters.AddWithValue("@Player1_Cards", player1Cards);
                         command.Parameters.AddWithValue("@Player2_Cards", player2Cards);
                         command.Parameters.AddWithValue("@BetAmount", betAmount);
+                        command.Parameters.AddWithValue("@Player1_Points", Player1Points);
+                        command.Parameters.AddWithValue("@Player2_Points", Player2Points);
 
                         command.ExecuteNonQuery();
                     }
@@ -72,7 +76,7 @@ namespace BlackJackLogic
                 {
                     connection.Open();
 
-                    string selectCommand = "SELECT * FROM GameData;";
+                    string selectCommand = "SELECT * FROM GameData ORDER BY Id DESC;";
                     using (var command = new SqliteCommand(selectCommand, connection))
                     {
                         using (var reader = command.ExecuteReader())
@@ -84,7 +88,9 @@ namespace BlackJackLogic
                                     Id = reader.GetInt32(0), // Id
                                     Player1Cards = reader.GetString(1), // Player1_Cards
                                     Player2Cards = reader.GetString(2), // Player2_Cards
-                                    BetAmount = reader.GetInt32(3) // BetAmount
+                                    BetAmount = reader.GetInt32(3), // BetAmount
+                                    Player1_Points= reader.GetInt32(4),
+                                    Player2_Points= reader.GetInt32(5)
                                 };
                                 gameDataList.Add(gameData);
                             }
