@@ -20,7 +20,8 @@ Projekt to jednoosobowa wersja klasycznej gry karcianej **Blackjack**, inspirowa
 
 ## Main Screen 
 
-![mainscreen](https://github.com/user-attachments/assets/419be0c3-c3d8-4b2b-bd46-caec616f3eb6)
+![BJ_Main](https://github.com/user-attachments/assets/ed920136-5892-450f-b799-7d4522625206)
+
 
 
 ## Game History Panel
