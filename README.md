@@ -15,7 +15,6 @@ Projekt to jednoosobowa wersja klasycznej gry karcianej **Blackjack**, inspirowa
 - **C#** – Język programowania wykorzystywany do tworzenia aplikacji.
 - **WPF (Windows Presentation Foundation)** – Framework do tworzenia aplikacji z interfejsem graficznym (UI) na system Windows, oferujący elegancki wygląd oraz dynamiczną interakcję z użytkownikiem.
 - **SQLite** – Baza danych do przechowywania informacji o historii gier.
-- **MVVM (Model-View-ViewModel)** – Architektura aplikacji stosowana w WPF do rozdzielania logiki aplikacji od interfejsu użytkownika.
 - **LINQ** – Używane do zapytań na danych, w tym analizy historii gier i wyników.
 
 ## Main Screen 
